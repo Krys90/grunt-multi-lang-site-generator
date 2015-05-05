@@ -147,6 +147,14 @@ module.exports = function(grunt) {
                 files: {
                     'index.html': 'test/fixtures/templates/render_all_vocabs.html.tmpl'
                 }
+            },
+            convert_entire_directory: {
+                options: {
+                    vocabs:           '*',
+                    vocab_directory:  'test/fixtures/vocabs/',
+                    output_directory: 'test/output/convert_entire_directory'
+                },
+                source: 'test/fixtures/source'
             }
         },
 

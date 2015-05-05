@@ -34,7 +34,7 @@ exports.template_runner = {
         actual   = grunt.file.read('test/output/vocabs_to_sites/english/index.html');
         expected = grunt.file.read('test/expected/vocabs_to_sites/english/index.html');
         test.equal(actual, expected, 'should create an english version of the site');
-        
+
         actual   = grunt.file.read('test/output/vocabs_to_sites/mundo/index.html');
         expected = grunt.file.read('test/expected/vocabs_to_sites/mundo/index.html');
         test.equal(actual, expected, 'should create a mundo version of the site');
@@ -49,7 +49,7 @@ exports.template_runner = {
         actual   = grunt.file.read('test/output/extra_data/english/index.html');
         expected = grunt.file.read('test/expected/extra_data/english/index.html');
         test.equal(actual, expected, 'should create an english version of the site with extra data from the grunt file');
-        
+
         actual   = grunt.file.read('test/output/extra_data/mundo/index.html');
         expected = grunt.file.read('test/expected/extra_data/mundo/index.html');
         test.equal(actual, expected, 'should create a mundo version of the site with extra data from the grunt file');
@@ -64,7 +64,7 @@ exports.template_runner = {
         actual   = grunt.file.read('test/output/multiple_files/english/index.html');
         expected = grunt.file.read('test/expected/multiple_files/english/index.html');
         test.equal(actual, expected, 'should create an index file');
-        
+
         actual   = grunt.file.read('test/output/multiple_files/english/page.html');
         expected = grunt.file.read('test/expected/multiple_files/english/page.html');
         test.equal(actual, expected, 'should create a page file');
@@ -128,9 +128,9 @@ exports.template_runner = {
             current_language = vocabs_to_test[i];
             actual           = grunt.file.read('test/output/render_all_vocabs/' + current_language + '/index.html');
             expected         = grunt.file.read('test/expected/render_all_vocabs/' + current_language + '/index.html');
-            test.equal(actual, expected, 'should create an ' + current_language + ' version of the site');         
+            test.equal(actual, expected, 'should create an ' + current_language + ' version of the site');
         }
-        
+
         test.done();
     },
     bb_code: function (test) {
@@ -157,6 +157,39 @@ exports.template_runner = {
         expected = grunt.file.read('test/expected/bb_code/english/bb_code_mixed.html');
 
         test.equal(actual, expected, 'should parse multiple BB in a vocab into mark up');
+
+        test.done();
+    },
+    convert_entire_directory: function (test) {
+
+        var expectedFiles = [
+            'test/output/convert_entire_directory/arabic',
+            'test/output/convert_entire_directory/arabic/test.html',
+            'test/output/convert_entire_directory/arabic/testcard.jpg',
+            'test/output/convert_entire_directory/arabic/more_source/index.inc',
+            'test/output/convert_entire_directory/arabic/more_source/no-template.html',
+            'test/output/convert_entire_directory/chinese',
+            'test/output/convert_entire_directory/chinese/test.html',
+            'test/output/convert_entire_directory/chinese/testcard.jpg',
+            'test/output/convert_entire_directory/chinese/more_source/index.inc',
+            'test/output/convert_entire_directory/chinese/more_source/no-template.html',
+            'test/output/convert_entire_directory/english',
+            'test/output/convert_entire_directory/english/test.html',
+            'test/output/convert_entire_directory/english/testcard.jpg',
+            'test/output/convert_entire_directory/english/more_source/index.inc',
+            'test/output/convert_entire_directory/english/more_source/no-template.html',
+            'test/output/convert_entire_directory/mundo',
+            'test/output/convert_entire_directory/mundo/test.html',
+            'test/output/convert_entire_directory/mundo/testcard.jpg',
+            'test/output/convert_entire_directory/mundo/more_source/index.inc',
+            'test/output/convert_entire_directory/mundo/more_source/no-template.html',
+        ];
+
+        test.expect(expectedFiles.length);
+
+        for (var i = 0; i < expectedFiles.length; i++) {
+            test.ok(grunt.file.exists(expectedFiles[i]), 'File not found: ' + expectedFiles[i]);
+        }
 
         test.done();
     }

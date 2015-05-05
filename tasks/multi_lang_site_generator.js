@@ -6,7 +6,7 @@ module.exports = function (grunt) {
         fs = require('fs');
 
     grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function () {
-        
+
         var options = this.options({
                 vocabs :            [],
                 data:               {},
@@ -16,14 +16,20 @@ module.exports = function (grunt) {
                 vocab_directory:    ''
             }),
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
-            files     = this.files;
+            files     = this.files,
+            source    = this.data.source;
 
-        validate_options(grunt, options, files);
+        validate_options(grunt, options, files, source);
 
         languages.forEach(function (lng) {
-            files.forEach(function (f) {
-                generate_output_file(grunt, lng, f, options);
-            });
+            if (source) {
+                grunt.log.fail('@TODO - copy source directory into output, processing templates as we go.');
+            }
+            else if (files) {
+                files.forEach(function (f) {
+                    generate_output_file(grunt, lng, f, options);
+                });
+            }
         });
     });
 
@@ -40,15 +46,19 @@ module.exports = function (grunt) {
         return [''];
     }
 
-    function validate_options (grunt, options, files) {
+    function validate_options (grunt, options, files, source) {
         grunt.verbose.writeflags(options, 'Options');
-        
+
         if (we_dont_have(options.vocabs)) {
             grunt.log.warn('Cannot run without any vocabs defined.');
         }
 
-        if (we_dont_have(files)) {
-            grunt.log.warn('Destination not written because no source files were provided.');
+        if (we_dont_have(files) && we_dont_have(source)) {
+            grunt.log.warn('Destination not written because no source files were provided. You need to specify a `source` or `files` property.');
+        }
+
+        if (we_have(files) && we_have(source)) {
+            grunt.log.warn('You provided `files` AND `source`. You should only provide one.');
         }
 
         add_forward_slash_to_end_of_dir_paths(options);
@@ -62,7 +72,7 @@ module.exports = function (grunt) {
             parsed_vocab_data = replace_bb_code_with_markup_in(vocab_data),
             data = _.merge(options.data, parsed_vocab_data, special_variables),
             src  = _.template(
-                grunt.file.read(options.template_directory + f.orig.src[0]), 
+                grunt.file.read(options.template_directory + f.orig.src[0]),
                 data,
                 define_the_imports_keyword(options, data, function () {
                     return define_the_imports_keyword(options, data);
@@ -79,7 +89,11 @@ module.exports = function (grunt) {
     }
 
     function we_dont_have (object) {
-        return object.length < 1;
+        return typeof object === 'undefined' || object.length < 1;
+    }
+
+    function we_have(object) {
+        return !we_dont_have(object);
     }
 
     function add_forward_slash_to_end_of_dir_paths (options) {
@@ -90,7 +104,7 @@ module.exports = function (grunt) {
 
     function do_the_forward_slash_adding (directory) {
         if (
-            (directory !== '') && 
+            (directory !== '') &&
             (directory.substr(-1) !== '/')
         ) {
             directory += '/';
@@ -139,7 +153,7 @@ module.exports = function (grunt) {
                         callback()
                     );
                 }
-            } 
+            }
         };
     }
 };
