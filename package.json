@@ -1,7 +1,7 @@
 {
   "name": "grunt-multi-lang-site-generator",
   "description": "Runs templates and i18n at grunt's compile time.",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "homepage": "http://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git",
   "contributors": [{
     "name": "Tom Maslen",
@@ -28,7 +28,8 @@
     "test": "grunt"
   },
   "dependencies": {
-    "lodash": "~2.2.1"
+    "lodash": "~2.2.1",
+    "file":   "~0.2.2"
   },
   "devDependencies": {
     "grunt-contrib-jshint":   "~0.1.1",
