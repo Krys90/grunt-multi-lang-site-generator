@@ -21,7 +21,7 @@ module.exports = function (grunt) {
 
         validate_options(grunt, options, files);
 
-        if (files.length === 0) {
+        if (we_dont_have(files)) {
             files = get_list_of_files(options);
         }
 
@@ -46,11 +46,9 @@ module.exports = function (grunt) {
     }
 
     function get_list_of_files(options) {
-        var files = [],
+        var files   = [],
+            source  = options.template_directory,
             destination;
-
-        var source      = options.template_directory,
-            exclude     = options.exclude || [];
 
         fileWalker.walkSync(source, function (base, subdirectories, filenames) {
             var currentDir = base.replace(source, ''); // 'test/fixtures/source/more_source' => '/more_source'
@@ -63,7 +61,7 @@ module.exports = function (grunt) {
                     destination = currentDir + '/' + filenames[i];
                 }
 
-                if (is_excluded(base + '/' + filenames[i], options)) {
+                if (is_excluded(base + '/' + filenames[i], options.exclude)) {
                     grunt.log.writeln('Excluded file detected. Skipping processing ' + base + '/' + filenames[i]);
                 }
                 else {
@@ -82,15 +80,13 @@ module.exports = function (grunt) {
             }
         });
 
-        console.log(files);
-
         return files;
     }
 
-    function is_excluded(sourceFile, options) {
-        for (var i = 0; i < options.exclude.length; i++) {
-            var tmp = sourceFile.replace(options.exclude[i], '');
-            if (tmp !== sourceFile) {
+    function is_excluded(sourceFile, excluded) {
+        excluded = excluded || [];
+        for (var i = 0; i < excluded.length; i++) {
+            if (sourceFile !== sourceFile.replace(excluded[i], '')) {
                 return true;
             }
         }
@@ -105,7 +101,7 @@ module.exports = function (grunt) {
         }
 
         if (we_dont_have(options.template_directory) && we_dont_have(files)) {
-            grunt.log.warn('You need to provide either: a) a list of files, OR b) a template directory (which will then process all files in that directory).');
+            grunt.log.warn('You need to provide either: a) a list of files, OR b) a template directory (which will then process all files in that directory), or c) a list of files and a template directory.');
         }
 
         add_forward_slash_to_end_of_dir_paths(options);
