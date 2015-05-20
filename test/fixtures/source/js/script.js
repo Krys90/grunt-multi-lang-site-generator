@@ -1,0 +1,5 @@
+;(function() {
+
+    // some JS file.
+
+})();

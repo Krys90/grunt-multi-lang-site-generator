@@ -162,33 +162,39 @@ exports.template_runner = {
     },
     convert_entire_directory: function (test) {
 
+        // these are the files we expect to have been carried over.
         var expectedFiles = [
-            'test/output/convert_entire_directory/arabic',
-            'test/output/convert_entire_directory/arabic/test.html',
-            'test/output/convert_entire_directory/arabic/testcard.jpg',
-            'test/output/convert_entire_directory/arabic/more_source/index.inc',
-            'test/output/convert_entire_directory/arabic/more_source/no-template.html',
-            'test/output/convert_entire_directory/chinese',
-            'test/output/convert_entire_directory/chinese/test.html',
-            'test/output/convert_entire_directory/chinese/testcard.jpg',
-            'test/output/convert_entire_directory/chinese/more_source/index.inc',
-            'test/output/convert_entire_directory/chinese/more_source/no-template.html',
             'test/output/convert_entire_directory/english',
             'test/output/convert_entire_directory/english/test.html',
-            'test/output/convert_entire_directory/english/testcard.jpg',
-            'test/output/convert_entire_directory/english/more_source/index.inc',
-            'test/output/convert_entire_directory/english/more_source/no-template.html',
-            'test/output/convert_entire_directory/mundo',
-            'test/output/convert_entire_directory/mundo/test.html',
-            'test/output/convert_entire_directory/mundo/testcard.jpg',
-            'test/output/convert_entire_directory/mundo/more_source/index.inc',
-            'test/output/convert_entire_directory/mundo/more_source/no-template.html',
+            'test/output/convert_entire_directory/english/img/testcard.jpg',
+            'test/output/convert_entire_directory/english/css/main.css',
+            'test/output/convert_entire_directory/english/tmpl/index.inc',
+            'test/output/convert_entire_directory/arabic',
+            'test/output/convert_entire_directory/arabic/test.html',
+            'test/output/convert_entire_directory/arabic/img/testcard.jpg',
+            'test/output/convert_entire_directory/arabic/css/main.css',
+            'test/output/convert_entire_directory/arabic/tmpl/index.inc'
+            // if we have english and arabic, we can safely assume we also have chinese and mundo
+        ];
+        // these are files which should NOT have been carried over (we deliberately omitted them because we want to minify the JS, compile the SASS, etc)
+        var unexpectedFiles = [
+            'test/output/convert_entire_directory/english/js',
+            'test/output/convert_entire_directory/english/js/script.js',
+            'test/output/convert_entire_directory/english/tmpl/subtemplates/header.tmpl',
+            'test/output/convert_entire_directory/arabic/js',
+            'test/output/convert_entire_directory/arabic/js/script.js',
+            'test/output/convert_entire_directory/arabic/tmpl/subtemplates/header.tmpl'
+            // if we have english and arabic, we can safely assume we also have chinese and mundo
         ];
 
-        test.expect(expectedFiles.length);
+        test.expect(expectedFiles.length + unexpectedFiles.length);
 
-        for (var i = 0; i < expectedFiles.length; i++) {
+        var i;
+        for (i = 0; i < expectedFiles.length; i++) {
             test.ok(grunt.file.exists(expectedFiles[i]), 'File not found: ' + expectedFiles[i]);
+        }
+        for (i = 0; i < unexpectedFiles.length; i++) {
+            test.ok(!grunt.file.exists(unexpectedFiles[i]), 'File found (and should NOT have been!): ' + unexpectedFiles[i]);
         }
 
         test.done();

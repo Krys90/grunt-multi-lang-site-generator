@@ -17,13 +17,12 @@ module.exports = function (grunt) {
                 vocab_directory:    ''
             }),
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
-            files     = this.files,
-            source    = this.data.source;
+            files     = this.files;
 
-        validate_options(grunt, options, files, source);
+        validate_options(grunt, options, files);
 
-        if (source) {
-            files = get_list_of_files(source);
+        if (files.length === 0) {
+            files = get_list_of_files(options);
         }
 
         languages.forEach(function (lng) {
@@ -46,53 +45,87 @@ module.exports = function (grunt) {
         return [''];
     }
 
-    function get_list_of_files(source) {
+    function get_list_of_files(options) {
         var files = [],
-            currentDir,
             destination;
 
+        var source      = options.template_directory,
+            exclude     = options.exclude || [];
+
         fileWalker.walkSync(source, function (base, subdirectories, filenames) {
-            currentDir = base.replace(source, ''); // 'test/fixtures/source/more_source' => '/more_source'
+            var currentDir = base.replace(source, ''); // 'test/fixtures/source/more_source' => '/more_source'
 
             for (var i = 0; i < filenames.length; i++) {
-                destination = '.' + currentDir + '/' + filenames[i];
+                if (currentDir.length === 0) {
+                    destination = filenames[i];
+                }
+                else {
+                    destination = currentDir + '/' + filenames[i];
+                }
 
-                // this strange object formation is identical to what Grunt creates when someone passes
-                // `files` rather than `source`. It does seem strange, and should probably be looked at. @TODO.
-                files.push({
-                    dest: destination,
-                    orig: {
-                        src:  [
-                            base + '/' + filenames[i]
-                        ],
-                        dest: destination
-                    }
-                });
+                if (is_excluded(base + '/' + filenames[i], options)) {
+                    grunt.log.writeln('Excluded file detected. Skipping processing ' + base + '/' + filenames[i]);
+                }
+                else {
+                    // this strange object formation is identical to what Grunt creates when someone passes
+                    // `files` rather than `source`. It does seem strange, and should probably be looked at. @TODO.
+                    files.push({
+                        dest: destination,
+                        orig: {
+                            src:  [
+                                currentDir + '/' + filenames[i]
+                            ],
+                            dest: destination
+                        }
+                    });
+                }
             }
         });
+
+        console.log(files);
 
         return files;
     }
 
-    function validate_options (grunt, options, files, source) {
+    function is_excluded(sourceFile, options) {
+        for (var i = 0; i < options.exclude.length; i++) {
+            var tmp = sourceFile.replace(options.exclude[i], '');
+            if (tmp !== sourceFile) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function validate_options (grunt, options, files) {
         grunt.verbose.writeflags(options, 'Options');
 
         if (we_dont_have(options.vocabs)) {
             grunt.log.warn('Cannot run without any vocabs defined.');
         }
 
-        if (we_dont_have(files) && we_dont_have(source)) {
-            grunt.log.warn('Destination not written because no source files were provided. You need to specify a `source` or `files` property.');
-        }
-
-        if (we_have(files) && we_have(source)) {
-            grunt.log.warn('You provided `files` AND `source`. You should only provide one.');
+        if (we_dont_have(options.template_directory) && we_dont_have(files)) {
+            grunt.log.warn('You need to provide either: a) a list of files, OR b) a template directory (which will then process all files in that directory).');
         }
 
         add_forward_slash_to_end_of_dir_paths(options);
     }
 
     function generate_output_file (grunt, lng, f, options) {
+
+        var dest = options.output_directory + lng + '/' + f.dest;
+
+        var fileName    = f.orig.src[0],
+            fileType    = fileName.split('.').pop(),
+            fixedAssets = options.copy_cleanly || [];
+
+        for (var i = 0; i < fixedAssets.length; i++) {
+            if (fixedAssets[i] === fileType) {
+                grunt.file.write(dest, fs.readFileSync(options.template_directory + fileName));
+                return true;
+            }
+        }
+
         var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
             special_variables = {
                 vocab_dir: lng
@@ -100,13 +133,12 @@ module.exports = function (grunt) {
             parsed_vocab_data = replace_bb_code_with_markup_in(vocab_data),
             data = _.merge(options.data, parsed_vocab_data, special_variables),
             src  = _.template(
-                grunt.file.read(options.template_directory + f.orig.src[0]),
+                grunt.file.read(options.template_directory + fileName),
                 data,
                 define_the_imports_keyword(options, data, function () {
                     return define_the_imports_keyword(options, data);
                 })
-            ),
-            dest = options.output_directory + lng + '/' + f.dest;
+            );
 
         grunt.file.write(dest, src);
         grunt.log.writeln('File "' + dest + '" created.');

@@ -150,11 +150,16 @@ module.exports = function(grunt) {
             },
             convert_entire_directory: {
                 options: {
-                    vocabs:           '*',
-                    vocab_directory:  'test/fixtures/vocabs/',
-                    output_directory: 'test/output/convert_entire_directory'
-                },
-                source: 'test/fixtures/source'
+                    vocabs:             '*',
+                    vocab_directory:    'test/fixtures/vocabs/',
+                    output_directory:   'test/output/convert_entire_directory',
+                    // contents of this filepath should be copied/translated for each language
+                    template_directory: 'test/fixtures/source',
+                    // some files shouldn't be copied (e.g. we want to do some preprocessing on them before copying)
+                    exclude:            ['test/fixtures/source/tmpl/subtemplates', 'test/fixtures/source/js'],
+                    // these filetypes should not be processed with Lodash (otherwise they'll be corrupted)
+                    copy_cleanly:       ['jpg']
+                }
             }
         },
 
