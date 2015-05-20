@@ -2,8 +2,9 @@
 
 module.exports = function (grunt) {
 
-    var _  = require('lodash'),
-        fs = require('fs');
+    var _          = require('lodash'),
+        fs         = require('fs'),
+        fileWalker = require('file');
 
     grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function () {
 
@@ -21,15 +22,14 @@ module.exports = function (grunt) {
 
         validate_options(grunt, options, files, source);
 
+        if (source) {
+            files = get_list_of_files(source);
+        }
+
         languages.forEach(function (lng) {
-            if (source) {
-                grunt.log.fail('@TODO - copy source directory into output, processing templates as we go.');
-            }
-            else if (files) {
-                files.forEach(function (f) {
-                    generate_output_file(grunt, lng, f, options);
-                });
-            }
+            files.forEach(function (f) {
+                generate_output_file(grunt, lng, f, options);
+            });
         });
     });
 
@@ -44,6 +44,34 @@ module.exports = function (grunt) {
             return vocabs;
         }
         return [''];
+    }
+
+    function get_list_of_files(source) {
+        var files = [],
+            currentDir,
+            destination;
+
+        fileWalker.walkSync(source, function (base, subdirectories, filenames) {
+            currentDir = base.replace(source, ''); // 'test/fixtures/source/more_source' => '/more_source'
+
+            for (var i = 0; i < filenames.length; i++) {
+                destination = '.' + currentDir + '/' + filenames[i];
+
+                // this strange object formation is identical to what Grunt creates when someone passes
+                // `files` rather than `source`. It does seem strange, and should probably be looked at. @TODO.
+                files.push({
+                    dest: destination,
+                    orig: {
+                        src:  [
+                            base + '/' + filenames[i]
+                        ],
+                        dest: destination
+                    }
+                });
+            }
+        });
+
+        return files;
     }
 
     function validate_options (grunt, options, files, source) {
