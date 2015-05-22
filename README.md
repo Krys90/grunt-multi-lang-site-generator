@@ -175,6 +175,11 @@ grunt.initConfig({
         output_directory: 'test/output/extra_data/',
         data: {
           "foo": "bar"
+        },
+        templatetoken: {
+          evaluate:      /\{\{(.+?)\}\}/g,
+          interpolate:   /\{\{=(.+?)\}\}/g,
+          escape:        /\{\{-(.+?)\}\}/g
         }
       },
       files: {
@@ -242,6 +247,23 @@ Will generate
 Check out this <a href="http://example.com">example</a> 
 ```
 
+### Changing default template tokens.
+
+There may be occasions when you are using the generator and you need to output client side templates to be rendered. If these client side templates use the same token i.e ```<% %>``` then the genrator will of course attempt to render these!
+
+One option is to change token on your client side templating solution, but this may not always be possible as there maybe a dependency outside your scope.
+
+```templatetoken``` exposes [lodash's option to change template tokens](http://documentcloud.github.io/underscore/#template).
+
+For example, to perform Mustache.js style templating:
+
+```
+templatetoken: {
+    evaluate:      /\{\{(.+?)\}\}/g,
+    interpolate:   /\{\{=(.+?)\}\}/g,
+    escape:        /\{\{-(.+?)\}\}/g
+  }
+```
 
 
 ## Thanks

@@ -27,6 +27,18 @@ module.exports = function (grunt) {
         });
     });
 
+    function updateLodashTemplateTokenSettings (token) {
+        if(typeof token.evaluate !== 'undefined') {
+            _.templateSettings.evaluate = token.evaluate;
+        }
+        if(typeof token.interpolate !== 'undefined') {
+            _.templateSettings.interpolate = token.interpolate;
+        }
+        if(typeof token.escape !== 'undefined') {
+            _.templateSettings.escape = token.escape;
+        }
+    }
+
     function get_list_of_languages (vocabs, vocab_directory) {
         var list_of_languages = [];
         if (all_vocabs_should_be_processed(vocabs)) {
@@ -42,6 +54,12 @@ module.exports = function (grunt) {
 
     function validate_options (grunt, options, files) {
         grunt.verbose.writeflags(options, 'Options');
+        
+        if (we_dont_have(options.templatetoken)) {
+            grunt.log.writeln('Using default template token');
+        } else {
+            updateLodashTemplateTokenSettings(options.templatetoken);
+        }
         
         if (we_dont_have(options.vocabs)) {
             grunt.log.warn('Cannot run without any vocabs defined.');
@@ -79,6 +97,9 @@ module.exports = function (grunt) {
     }
 
     function we_dont_have (object) {
+        if(typeof object === 'undefined') {
+            return true;
+        }
         return object.length < 1;
     }
 
