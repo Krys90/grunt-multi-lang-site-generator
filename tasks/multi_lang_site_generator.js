@@ -97,7 +97,6 @@ module.exports = function (grunt) {
     }
 
     function we_dont_have (object) {
-        console.log(object);
         if(typeof object === 'undefined') {
             return true;
         }
