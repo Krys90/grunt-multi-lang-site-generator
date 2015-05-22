@@ -12,10 +12,10 @@
   }, {
     "name": "Chris Ashton",
     "email": "chrisashtonweb@gmail.com"
-  }], {
+  }, {
     "name": "Steven Atherton",
     "email": "steven@tarquindandy.com"
-  }]
+  }],
   "repository": {
     "type": "git",
     "url": "https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git"
