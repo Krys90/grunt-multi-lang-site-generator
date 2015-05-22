@@ -18,10 +18,6 @@ module.exports = function (grunt) {
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
             files     = this.files;
 
-        if (!!options.templatetoken) {
-            updateLodashTemplateTokenSettings(options.templatetoken);
-        }
-
         validate_options(grunt, options, files);
 
         languages.forEach(function (lng) {
@@ -58,6 +54,12 @@ module.exports = function (grunt) {
 
     function validate_options (grunt, options, files) {
         grunt.verbose.writeflags(options, 'Options');
+        
+        if (we_dont_have(options.templatetoken)) {
+            grunt.log.writeln('Using default template token');
+        } else {
+            updateLodashTemplateTokenSettings(options.templatetoken);
+        }
         
         if (we_dont_have(options.vocabs)) {
             grunt.log.warn('Cannot run without any vocabs defined.');
