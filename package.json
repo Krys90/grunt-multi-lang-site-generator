@@ -1,27 +1,24 @@
 {
-  "name": "grunt-multi-lang-site-generator",
-  "description": "Runs templates and i18n at grunt's compile time.",
+  "name": "grunt-atlas-multi-lang",
+  "description": "Fork of BBCVisualJournalism/grunt-multi-lang-site-generator with some custom modifications.",
   "version": "0.6.0",
-  "homepage": "http://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git",
+  "homepage" : "https://github.com/anmasi/grunt-multi-lang-site-generator",
   "contributors": [{
-    "name": "Tom Maslen",
-    "email": "tom_maslen@hotmail.com"
+    "name": "simone di nuovo",
+    "email": "simone.dinuovo@finconsgroup.com"
   }, {
-    "name": "Aidan Fewster",
-    "email": "fewstera@gmail.com"
+    "name": "Andrea pombeni",
+    "email": "andrea.pombeni@finconsgroup.com"
   }, {
-    "name": "Chris Ashton",
-    "email": "chrisashtonweb@gmail.com"
-  }, {
-    "name": "Steven Atherton",
-    "email": "steven@tarquindandy.com"
+    "name": "Marco Sut",
+    "email": "marco.sut@finconsgroup.com"
   }],
   "repository": {
     "type": "git",
-    "url": "https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator.git"
+    "url": "https://github.com/anmasi/grunt-multi-lang-site-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator/issues"
+    "url": "https://github.com/anmasi/grunt-multi-lang-site-generator/issues"
   },
   "main": "Gruntfile.js",
   "engines": {

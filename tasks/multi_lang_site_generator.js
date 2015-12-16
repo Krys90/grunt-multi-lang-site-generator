@@ -6,7 +6,7 @@ module.exports = function (grunt) {
         fs = require('fs');
 
     grunt.registerMultiTask('multi_lang_site_generator', 'Create multiple translated sites based on templates and vocab json objects.', function () {
-        
+
         var options = this.options({
                 vocabs :            [],
                 data:               {},
@@ -54,13 +54,13 @@ module.exports = function (grunt) {
 
     function validate_options (grunt, options, files) {
         grunt.verbose.writeflags(options, 'Options');
-        
+
         if (we_dont_have(options.templatetoken)) {
             grunt.log.writeln('Using default template token');
         } else {
             updateLodashTemplateTokenSettings(options.templatetoken);
         }
-        
+
         if (we_dont_have(options.vocabs)) {
             grunt.log.warn('Cannot run without any vocabs defined.');
         }
@@ -80,7 +80,7 @@ module.exports = function (grunt) {
             parsed_vocab_data = replace_bb_code_with_markup_in(vocab_data),
             data = _.merge(options.data, parsed_vocab_data, special_variables),
             src  = _.template(
-                grunt.file.read(options.template_directory + f.orig.src[0]), 
+                grunt.file.read(options.template_directory + f.src[0]),
                 data,
                 define_the_imports_keyword(options, data, function () {
                     return define_the_imports_keyword(options, data);
@@ -111,7 +111,7 @@ module.exports = function (grunt) {
 
     function do_the_forward_slash_adding (directory) {
         if (
-            (directory !== '') && 
+            (directory !== '') &&
             (directory.substr(-1) !== '/')
         ) {
             directory += '/';
@@ -160,7 +160,7 @@ module.exports = function (grunt) {
                         callback()
                     );
                 }
-            } 
+            }
         };
     }
 };
