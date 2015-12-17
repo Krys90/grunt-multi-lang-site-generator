@@ -1,7 +1,7 @@
 {
   "name": "grunt-atlas-multi-lang",
   "description": "Fork of BBCVisualJournalism/grunt-multi-lang-site-generator with some custom modifications.",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "homepage" : "https://github.com/anmasi/grunt-multi-lang-site-generator",
   "contributors": [{
     "name": "simone di nuovo",
