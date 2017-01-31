@@ -2,8 +2,6 @@
 
 # grunt-atlas-watch-portal-multi-lang
 
-Fork of anmasi/grunt-multi-lang-site-generator with some custom modifications. 
-Added dynamic src file mapping support, handle deeper vocabulary json, removed bbcode.
 
 ## Thanks
 
