@@ -2,10 +2,12 @@
 
 # grunt-atlas-multi-lang
 
-Fork of BBCVisualJournalism/grunt-multi-lang-site-generator with some custom modifications. 
+Fork of anmasi/grunt-multi-lang-site-generator with some custom modifications. 
 Added dynamic src file mapping support, handle deeper vocabulary json, removed bbcode.
-
 
 ## Thanks
 
-This project is forked from BBCVisualJournalism [grunt-multi-lang-site-generator](https://github.com/BBCVisualJournalism/grunt-multi-lang-site-generator/).
+This project is forked from 
+
+
+anmasi [grunt-multi-lang-site-generator](https://github.com/anmasi/grunt-multi-lang-site-generator).
