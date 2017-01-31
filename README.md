@@ -1,4 +1,4 @@
-[![NPM](https://nodei.co/npm/grunt-atlas-multi-lang.png?compact=true)](https://www.npmjs.com/package/grunt-atlas-multi-lang) [![Build Status](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator.svg)](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator)
+[![NPM](https://nodei.co/npm/grunt-atlas-watch-multi-lang.png?compact=true)](https://www.npmjs.com/package/grunt-atlas-watch-multi-lang) [![Build Status](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator.svg)](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator)
 
 # grunt-atlas-watch-portal-multi-lang
 
