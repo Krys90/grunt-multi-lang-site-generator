@@ -1,24 +1,21 @@
 {
-  "name": "grunt-atlas-multi-lang",
-  "description": "Fork of BBCVisualJournalism/grunt-multi-lang-site-generator with some custom modifications.",
-  "version": "0.6.2",
-  "homepage" : "https://github.com/anmasi/grunt-multi-lang-site-generator",
+  "name": "grunt-atlas-watch-multi-lang",
+  "description": "Fork of anmasi/grunt-multi-lang-site-generator with some custom modifications.",
+  "version": "0.0.1",
+  "homepage" : "https://github.com/krys90/grunt-multi-lang-site-generator",
   "contributors": [{
-    "name": "simone di nuovo",
-    "email": "simone.dinuovo@finconsgroup.com"
+    "name": "Christian Zuanetto",
+    "email": "christian.zuanetto@finconsgroup.com"
   }, {
-    "name": "Andrea pombeni",
-    "email": "andrea.pombeni@finconsgroup.com"
-  }, {
-    "name": "Marco Sut",
-    "email": "marco.sut@finconsgroup.com"
+    "name": "Ivo Carminati",
+    "email": "ivo.carminati@finconsgroup.com"
   }],
   "repository": {
     "type": "git",
-    "url": "https://github.com/anmasi/grunt-multi-lang-site-generator.git"
+    "url": "https://github.com/krys90/grunt-multi-lang-site-generator.git"
   },
   "bugs": {
-    "url": "https://github.com/anmasi/grunt-multi-lang-site-generator/issues"
+    "url": "https://github.com/krys90/grunt-multi-lang-site-generator/issues"
   },
   "main": "Gruntfile.js",
   "engines": {
