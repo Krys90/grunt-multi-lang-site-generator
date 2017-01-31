@@ -73,10 +73,22 @@ module.exports = function (grunt) {
     }
 
     function generate_output_file (grunt, lng, f, options) {
-        var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
-            special_variables = {
+
+        if (options.subdomain) {
+            var cleanfolder = lng.split("-");
+            var dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
+            var special_variables = {
+                vocab_dir: ''
+            };
+        } else {
+            var dest = options.output_directory + '/' + lng + '/' + f.dest;
+            var special_variables = {
                 vocab_dir: lng
-            },
+            };
+        }
+
+
+        var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
             data = _.merge(options.data, vocab_data, special_variables),
             src  = _.template(
                 grunt.file.read(f.src),
@@ -85,17 +97,6 @@ module.exports = function (grunt) {
                     return define_the_imports_keyword(options, data);
                 })
             )
-
-
-        grunt.log.writeln('COSSSAAAA "' + options.subdomain);
-
-        if (options.subdomain) {
-            var cleanfolder = lng.split("-");
-            var dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
-        } else {
-            var dest = options.output_directory + '/' + lng + '/' + f.dest;
-        }
-
 
         grunt.file.write(dest, src);
         grunt.log.writeln('File "' + dest + '" created.');
