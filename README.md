@@ -1,6 +1,6 @@
 [![NPM](https://nodei.co/npm/grunt-atlas-multi-lang.png?compact=true)](https://www.npmjs.com/package/grunt-atlas-multi-lang) [![Build Status](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator.svg)](https://travis-ci.org/BBCVisualJournalism/grunt-multi-lang-site-generator)
 
-# grunt-atlas-multi-lang
+# grunt-atlas-watch-portal-multi-lang
 
 Fork of anmasi/grunt-multi-lang-site-generator with some custom modifications. 
 Added dynamic src file mapping support, handle deeper vocabulary json, removed bbcode.
