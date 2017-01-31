@@ -5,7 +5,7 @@ module.exports = function (grunt) {
     var _  = require('lodash'),
         fs = require('fs');
 
-    grunt.registerMultiTask('atlas_multi_lang', 'Create multiple translated sites based on templates and vocab json objects.', function () {
+    grunt.registerMultiTask('atlas_watch_multi_lang', 'Create multiple translated sites based on templates and vocab json objects.', function () {
 
         var options = this.options({
                 vocabs :            [],
@@ -76,6 +76,7 @@ module.exports = function (grunt) {
             special_variables = {
                 vocab_dir: lng
             },
+            cleanfolder = lng.split("-"),
             data = _.merge(options.data, vocab_data, special_variables),
             src  = _.template(
                 grunt.file.read(f.src),
@@ -84,7 +85,7 @@ module.exports = function (grunt) {
                     return define_the_imports_keyword(options, data);
                 })
             ),
-            dest = options.output_directory + lng + '/' + f.dest;
+            dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
 
         grunt.file.write(dest, src);
         grunt.log.writeln('File "' + dest + '" created.');

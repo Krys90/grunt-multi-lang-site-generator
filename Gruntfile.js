@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         },
 
         // Configuration to be run (and then tested).
-        atlas_multi_lang: {
+        atlas_watch_multi_lang: {
             vocabs_to_sites: {
                 options: {
                     vocabs:           ['english', 'mundo'],
