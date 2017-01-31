@@ -9,6 +9,7 @@ module.exports = function (grunt) {
 
         var options = this.options({
                 vocabs :            [],
+                subdomain:          false,
                 data:               {},
                 output_directory:   '',
                 sub_templates:      '',
@@ -76,7 +77,6 @@ module.exports = function (grunt) {
             special_variables = {
                 vocab_dir: lng
             },
-            cleanfolder = lng.split("-"),
             data = _.merge(options.data, vocab_data, special_variables),
             src  = _.template(
                 grunt.file.read(f.src),
@@ -84,8 +84,18 @@ module.exports = function (grunt) {
                 define_the_imports_keyword(options, data, function () {
                     return define_the_imports_keyword(options, data);
                 })
-            ),
-            dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
+            )
+
+
+        grunt.log.writeln('COSSSAAAA "' + options.subdomain);
+
+        if (options.subdomain) {
+            var cleanfolder = lng.split("-");
+            var dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
+        } else {
+            var dest = options.output_directory + '/' + lng + '/' + f.dest;
+        }
+
 
         grunt.file.write(dest, src);
         grunt.log.writeln('File "' + dest + '" created.');

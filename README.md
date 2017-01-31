@@ -2,7 +2,7 @@
 
 # grunt-atlas-watch-portal-multi-lang
 Changed the root translation folder created.
-
+Add option to setting subfolder
 
 ## Thanks
 

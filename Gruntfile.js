@@ -27,6 +27,7 @@ module.exports = function(grunt) {
                     vocabs:           ['english', 'mundo'],
                     vocab_directory:  'test/fixtures/vocabs/',
                     output_directory: 'test/output/vocabs_to_sites/',
+                    subdomain: false
                 },
                 files: {
                     'index.html': ['test/fixtures/templates/index.html.tmpl']
@@ -49,7 +50,8 @@ module.exports = function(grunt) {
                 options: {
                     vocabs:           ['english'],
                     vocab_directory:  'test/fixtures/vocabs/',
-                    output_directory: 'test/output/multiple_files'
+                    output_directory: 'test/output/multiple_files',
+                    subdomain: false
                 },
                 files: {
                     'index.html': 'test/fixtures/templates/index.html.tmpl',
@@ -61,7 +63,8 @@ module.exports = function(grunt) {
                     vocabs:             ['english'],
                     vocab_directory:    'test/fixtures/vocabs',
                     output_directory:   'test/output/template_directory_option',
-                    template_directory: 'test/fixtures/templates/'
+                    template_directory: 'test/fixtures/templates/',
+                    subdomain: false
                 },
                 files: {
                     'index.html': 'index.html.tmpl'
@@ -71,7 +74,8 @@ module.exports = function(grunt) {
                 options: {
                     vocabs:           ['english'],
                     vocab_directory:  'test/fixtures/vocabs',
-                    output_directory: 'test/output/special_variables'
+                    output_directory: 'test/output/special_variables',
+                    subdomain: false
                 },
                 files: {
                     'special_variables.html': 'test/fixtures/templates/special_variables.html.tmpl'
@@ -98,7 +102,8 @@ module.exports = function(grunt) {
                     vocabs:             ['english'],
                     vocab_directory:    'test/fixtures/vocabs',
                     output_directory:   'test/output/sub_template_with_parameters',
-                    template_directory: 'test/fixtures/templates'
+                    template_directory: 'test/fixtures/templates',
+                    subdomain: false
                 },
                 files: {
                     'index.html': 'sub_template_with_parameters.html.tmpl'
@@ -109,7 +114,8 @@ module.exports = function(grunt) {
                     vocabs:             ['english'],
                     vocab_directory:    'test/fixtures/vocabs',
                     output_directory:   'test/output/nested_sub_templates',
-                    template_directory: 'test/fixtures/templates'
+                    template_directory: 'test/fixtures/templates',
+                    subdomain: false
                 },
                 files: {
                     'index.html': 'nested_sub_template_1.html.tmpl'
@@ -119,7 +125,8 @@ module.exports = function(grunt) {
                 options: {
                     vocabs:           ['english'],
                     vocab_directory:  'test/fixtures/vocabs/',
-                    output_directory: 'test/output/bb_code'
+                    output_directory: 'test/output/bb_code',
+                    subdomain: false
                 },
                 files: {
                     'bb_code_bold.html':      'test/fixtures/templates/bb_code_bold.html.tmpl',
@@ -132,7 +139,8 @@ module.exports = function(grunt) {
                 options: {
                     vocabs:           ['*'],
                     vocab_directory:  'test/fixtures/vocabs/',
-                    output_directory: 'test/output/render_all_vocabs'
+                    output_directory: 'test/output/render_all_vocabs',
+                    subdomain: false
                 },
                 files: {
                     'index.html': 'test/fixtures/templates/render_all_vocabs.html.tmpl'
@@ -142,7 +150,8 @@ module.exports = function(grunt) {
                 options: {
                     vocabs:           '*',
                     vocab_directory:  'test/fixtures/vocabs/',
-                    output_directory: 'test/output/render_all_vocabs'
+                    output_directory: 'test/output/render_all_vocabs',
+                    subdomain: false
                 },
                 files: {
                     'index.html': 'test/fixtures/templates/render_all_vocabs.html.tmpl'
