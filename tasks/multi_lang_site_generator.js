@@ -13,7 +13,8 @@ module.exports = function (grunt) {
                 data:               {},
                 output_directory:   '',
                 sub_templates:      '',
-                vocab_directory:    ''
+                vocab_directory:    '',
+                static_url: ''
             }),
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
             files     = this.files;
@@ -77,16 +78,15 @@ module.exports = function (grunt) {
         if (options.subdomain) {
             var cleanfolder = lng.split("-");
             var dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
-            var special_variables = {
-                vocab_dir: ''
-            };
+           
         } else {
             var dest = options.output_directory + '/' + lng + '/' + f.dest;
-            var special_variables = {
-                vocab_dir: lng
-            };
         }
 
+            var special_variables = {
+                vocab_dir: '',
+                cdn_absolute_url : ''
+            };
 
         var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
             data = _.merge(options.data, vocab_data, special_variables),

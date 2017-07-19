@@ -1,11 +1,11 @@
 {
   "name": "grunt-atlas-watch-multi-lang",
   "description": "Fork of anmasi/grunt-multi-lang-site-generator with some custom modifications.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "homepage" : "https://github.com/krys90/grunt-multi-lang-site-generator",
   "contributors": [{
     "name": "Christian Zuanetto",
-    "email": "christian.zuanetto@finconsgroup.com"
+    "email": "krys90@gmail.com"
   }, {
     "name": "Ivo Carminati",
     "email": "ivo.carminati@finconsgroup.com"
