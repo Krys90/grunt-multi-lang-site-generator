@@ -14,7 +14,7 @@ module.exports = function (grunt) {
                 output_directory:   '',
                 sub_templates:      '',
                 vocab_directory:    '',
-                static_url: ''
+                cdn_absolute_url: ''
             }),
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
             files     = this.files;
