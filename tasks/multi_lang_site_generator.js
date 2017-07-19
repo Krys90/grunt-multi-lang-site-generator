@@ -78,15 +78,19 @@ module.exports = function (grunt) {
         if (options.subdomain) {
             var cleanfolder = lng.split("-");
             var dest = options.output_directory + cleanfolder[0] + '/' + cleanfolder[1] + '/' + f.dest;
-           
-        } else {
-            var dest = options.output_directory + '/' + lng + '/' + f.dest;
-        }
-
             var special_variables = {
                 vocab_dir: '',
                 cdn_absolute_url_dir : options.cdn_absolute_url
             };
+        } else {
+            var dest = options.output_directory + '/' + lng + '/' + f.dest;
+            var special_variables = {
+                vocab_dir: lng,
+                cdn_absolute_url_dir : options.cdn_absolute_url
+            };
+        }
+
+
 
         var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),
             data = _.merge(options.data, vocab_data, special_variables),
