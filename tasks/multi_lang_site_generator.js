@@ -14,7 +14,7 @@ module.exports = function (grunt) {
                 output_directory:   '',
                 sub_templates:      '',
                 vocab_directory:    '',
-                cdn_absolute_url: ''
+                cdn_absolute_url:   ''
             }),
             languages = get_list_of_languages(options.vocabs, options.vocab_directory),
             files     = this.files;
@@ -85,7 +85,7 @@ module.exports = function (grunt) {
 
             var special_variables = {
                 vocab_dir: '',
-                cdn_absolute_url : ''
+                cdn_absolute_url_dir : options.cdn_absolute_url
             };
 
         var vocab_data = JSON.parse(grunt.file.read(options.vocab_directory + lng + '.json')),

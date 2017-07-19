@@ -1,7 +1,7 @@
 {
   "name": "grunt-atlas-watch-multi-lang",
   "description": "Fork of anmasi/grunt-multi-lang-site-generator with some custom modifications.",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "homepage" : "https://github.com/krys90/grunt-multi-lang-site-generator",
   "contributors": [{
     "name": "Christian Zuanetto",

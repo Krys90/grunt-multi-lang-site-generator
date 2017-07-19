@@ -27,8 +27,8 @@ module.exports = function(grunt) {
                     vocabs:           ['english', 'mundo'],
                     vocab_directory:  'test/fixtures/vocabs/',
                     output_directory: 'test/output/vocabs_to_sites/',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': ['test/fixtures/templates/index.html.tmpl']
                 }
@@ -51,8 +51,8 @@ module.exports = function(grunt) {
                     vocabs:           ['english'],
                     vocab_directory:  'test/fixtures/vocabs/',
                     output_directory: 'test/output/multiple_files',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': 'test/fixtures/templates/index.html.tmpl',
                     'page.html':  'test/fixtures/templates/page.html.tmpl'
@@ -64,8 +64,8 @@ module.exports = function(grunt) {
                     vocab_directory:    'test/fixtures/vocabs',
                     output_directory:   'test/output/template_directory_option',
                     template_directory: 'test/fixtures/templates/',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': 'index.html.tmpl'
                 }
@@ -75,8 +75,8 @@ module.exports = function(grunt) {
                     vocabs:           ['english'],
                     vocab_directory:  'test/fixtures/vocabs',
                     output_directory: 'test/output/special_variables',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'special_variables.html': 'test/fixtures/templates/special_variables.html.tmpl'
                 }
@@ -103,8 +103,8 @@ module.exports = function(grunt) {
                     vocab_directory:    'test/fixtures/vocabs',
                     output_directory:   'test/output/sub_template_with_parameters',
                     template_directory: 'test/fixtures/templates',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': 'sub_template_with_parameters.html.tmpl'
                 }
@@ -115,8 +115,8 @@ module.exports = function(grunt) {
                     vocab_directory:    'test/fixtures/vocabs',
                     output_directory:   'test/output/nested_sub_templates',
                     template_directory: 'test/fixtures/templates',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': 'nested_sub_template_1.html.tmpl'
                 }
@@ -126,8 +126,8 @@ module.exports = function(grunt) {
                     vocabs:           ['english'],
                     vocab_directory:  'test/fixtures/vocabs/',
                     output_directory: 'test/output/bb_code',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'bb_code_bold.html':      'test/fixtures/templates/bb_code_bold.html.tmpl',
                     'bb_code_paragraph.html': 'test/fixtures/templates/bb_code_paragraph.html.tmpl',
@@ -140,8 +140,8 @@ module.exports = function(grunt) {
                     vocabs:           ['*'],
                     vocab_directory:  'test/fixtures/vocabs/',
                     output_directory: 'test/output/render_all_vocabs',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': 'test/fixtures/templates/render_all_vocabs.html.tmpl'
                 }
@@ -151,8 +151,8 @@ module.exports = function(grunt) {
                     vocabs:           '*',
                     vocab_directory:  'test/fixtures/vocabs/',
                     output_directory: 'test/output/render_all_vocabs',
-                    subdomain: false
-                },
+                    subdomain: false,
+                    cdn_absolute_url : ''                },
                 files: {
                     'index.html': 'test/fixtures/templates/render_all_vocabs.html.tmpl'
                 }
